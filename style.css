@@ -1,0 +1,101 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
+li {
+  /* line-height: 1.5rem; */
+  padding-top: 1rem;
+}
+h1 {
+  margin: 0;
+  padding: 1rem 3rem;
+}
+h2 {
+  font-size: 1rem;
+}
+.header {
+  background-color: #31a280;
+  color: white;
+}
+.content {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.projects-panel {
+  padding-left: 1rem;
+  background-color: #dce1df;
+  height: 100vh;
+}
+
+.active-project-panel {
+  padding-left: 1rem;
+}
+.project-name {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.project-name:hover {
+  background-color: white;
+}
+.project-list {
+  padding-left: 0rem;
+  margin-left: 0;
+}
+.new-project-input {
+  background-color: inherit;
+  border: none;
+  font: inherit;
+  font-size: inherit;
+}
+.new-project-input:focus {
+  outline: none;
+}
+.selected-project {
+  background-color: white;
+}
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.delete-project-logo {
+  height: 16px;
+  padding-left: 1rem;
+}
+.edit-project-logo {
+  height: 16px;
+  padding-left: 1rem;
+}
+.active-project-header {
+  display: flex;
+  align-items: center;
+}
+.list-notes {
+  padding: 0;
+  margin: 0;
+  margin-left: 1rem;
+  font-style: italic;
+}
+.add-new-task-img {
+  height: 22px;
+  padding: 1rem 0rem;
+}
+.btn-add-new-task {
+  border: none;
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  font-style: bold;
+  font: inherit;
+  width: 100%;
+}
+/* .new-task-list {
+  border: solid 1px black;
+  height: fit-content;
+  width: 600px;
+  padding: 1rem;
+} */

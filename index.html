@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="header"><h1></h1></div>
+    <div class="content">
+      <div class="projects-panel">
+        <button class="btn-add-new-task" data-add-new-task>
+          <img class="add-new-task-img" src="/images/icon-plus.svg" alt="" />
+          <h2>Add new task</h2>
+        </button>
+        <h2>Today</h2>
+        <h2>Projects</h2>
+
+        <ul class="project-list" data-projects>
+          <!-- <li class = 'project-name'>Today</li>
+          <li class = 'project-name>Home</li>
+          <li class = 'project-name>Learning</li>
+          <li class = 'project-name>Guitar</li> -->
+        </ul>
+
+        <form data-new-project-form>
+          <input
+            class="new-project-input"
+            data-new-project-input
+            type="text"
+            placeholder=" + Add new project"
+          />
+        </form>
+      </div>
+      <div class="active-project-panel" data-active-project-container>
+        <div class="active-project-header">
+          <h2 data-selected-project-name>Today</h2>
+          <img class="edit-project-logo" src="/images/icon-edit.svg" alt="" />
+          <img class="delete-project-logo" src="/images/icon-bin.svg" alt="" />
+        </div>
+        <ul class="task-list" data-task-list></ul>
+        <form data-new-task-form>
+          <input
+            class="new-task-input"
+            data-new-task-input
+            type="text"
+            placeholder=" + Add task"
+          />
+        </form>
+        <button class="btn btnDelete" data-delete-project-btn>
+          Delete Project
+        </button>
+      </div>
+      <div class="new-task-list">
+        <form>
+          <h2>Add new task</h2>
+          <input type="text" placeholder="task name" />
+          <input type="text" placeholder="notes (optional)" />
+
+          <input id="due-date" type="date" placeholder="due date" />
+        </form>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
