@@ -44,7 +44,13 @@
         <div class="active-project-header">
           <h2 data-selected-project-name>Today</h2>
           <img class="edit-project-logo" src="/images/icon-edit.svg" alt="" />
-          <img class="delete-project-logo" src="/images/icon-bin.svg" alt="" />
+          <button class="btn btnDelete" data-delete-project-btn>
+            <img
+              class="delete-project-btn-icon"
+              src="/images/icon-bin.svg"
+              alt=""
+            />
+          </button>
         </div>
         <ul class="task-list" data-task-list></ul>
         <form data-new-task-form>
@@ -55,17 +61,16 @@
             placeholder=" + Add task"
           />
         </form>
-        <button class="btn btnDelete" data-delete-project-btn>
-          Delete Project
-        </button>
       </div>
-      <div class="new-task-list">
+      <div class="add-new-task-list">
         <form>
           <h2>Add new task</h2>
           <input type="text" placeholder="task name" />
           <input type="text" placeholder="notes (optional)" />
 
           <input id="due-date" type="date" placeholder="due date" />
+          <input type="select" placeholder="project" />
+          <button>Add task</button>
         </form>
       </div>
     </div>

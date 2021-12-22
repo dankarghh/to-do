@@ -13,6 +13,7 @@ const selectedProjectName = document.querySelector(
 );
 const LOCAL_STORAGE_PROJECT_KEY = "project.lists";
 const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = "project.selectedProjectId";
+const checkbox = document.querySelector;
 
 let projects =
   JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || [];
@@ -53,16 +54,23 @@ function renderTaskList() {
     selectedProject.tasks.forEach(task => {
       const listElement = document.createElement("li");
       const checkbox = document.createElement("input");
+      const listItemContainer = document.createElement("div");
+      listItemContainer.classList.add("list-item-container");
+      taskList.appendChild(listItemContainer);
+
       checkbox.type = "checkbox";
       listElement.classList.add("list-item");
       listElement.innerText = task.name;
-      taskList.appendChild(checkbox);
-      taskList.appendChild(listElement);
+      listItemContainer.appendChild(checkbox);
+      listItemContainer.appendChild(listElement);
       if (task.notes !== "") {
         const listNoteElement = document.createElement("p");
+        const listNoteElementContainer = document.createElement("div");
+        listNoteElementContainer.classList.add("list-note-element-container");
         listNoteElement.classList.add("list-notes");
+        listItemContainer.appendChild(listNoteElementContainer);
         listNoteElement.innerText = `notes: ${task.notes}`;
-        listElement.appendChild(listNoteElement);
+        taskList.appendChild(listNoteElement);
       }
     });
   }
@@ -102,6 +110,7 @@ render();
 
 newProjectForm.addEventListener("submit", e => {
   e.preventDefault();
+  if (newProjectInput.value == null || newProjectInput.value === "") return;
   const project = new Project(newProjectInput.value);
   selectedProjectId = project.id;
   newProjectInput.value = null;
@@ -132,10 +141,12 @@ class Task {
   constructor(name) {
     this.name = name;
     this.id = Date.now().toString();
-    this.notes = "ddgdgdgs asdgljksndg sdgsdg";
+    this.notes = "";
     this.dueDate = "";
     this.completed = false;
   }
 }
 
-//
+// add checkbox which changes completed status
+//make proper add task modal that opens when click new task
+//make homepage with all tasks in all projects

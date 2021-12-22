@@ -68,7 +68,6 @@ h2 {
 }
 .edit-project-logo {
   height: 16px;
-  padding-left: 1rem;
 }
 .active-project-header {
   display: flex;
@@ -99,3 +98,18 @@ h2 {
   width: 600px;
   padding: 1rem;
 } */
+.delete-project-btn-icon {
+  height: 16px;
+}
+.btnDelete {
+  border: none;
+  background: white;
+}
+.list-item {
+  display: block;
+  padding: 0;
+}
+.list-item-container {
+  display: flex;
+  align-items: center;
+}
