@@ -92,12 +92,7 @@ h2 {
   font: inherit;
   width: 100%;
 }
-/* .new-task-list {
-  border: solid 1px black;
-  height: fit-content;
-  width: 600px;
-  padding: 1rem;
-} */
+
 .delete-project-btn-icon {
   height: 16px;
 }
@@ -112,4 +107,24 @@ h2 {
 .list-item-container {
   display: flex;
   align-items: center;
+  padding: 0.5rem;
+  max-width: 600px;
+}
+.new-task-form {
+  margin-top: 1rem;
+  box-shadow: 2px 2px 15px 0px #989898;
+  padding: 0.5rem 2rem 2rem 2rem;
+  border-radius: 10px;
+  width: fit-content;
+}
+.new-task-form h2 {
+  background-color: #31a280;
+}
+.checkbox {
+  cursor: pointer;
+}
+.due-date-container {
+  display: flex;
+  width: 600px;
+  justify-content: end;
 }

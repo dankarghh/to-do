@@ -6,6 +6,8 @@ const newProjectForm = document.querySelector("[data-new-project-form]");
 const newProjectInput = document.querySelector("[data-new-project-input]");
 const newTaskForm = document.querySelector("[data-new-task-form]");
 const newTaskInput = document.querySelector("[data-new-task-input]");
+const newTaskNotesInput = document.querySelector("[data-new-notes-input]");
+const newTaskDateInput = document.querySelector("[data-new-date-input]");
 const taskList = document.querySelector("[data-task-list]");
 const deleteProjectBtn = document.querySelector("[data-delete-project-btn]");
 const selectedProjectName = document.querySelector(
@@ -18,17 +20,31 @@ const checkbox = document.querySelector;
 let projects =
   JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || [];
 
-let selectedProjectId;
+let selectedProjectId = null;
 
 // JSON.parse(
 //   localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY)
 // );
 
+//add event listener to project container in order to assign selected project
 projectsContainer.addEventListener("click", e => {
   if (e.target.tagName.toLowerCase() === "li") {
     selectedProjectId = e.target.dataset.projectId;
     saveAndRender();
   }
+});
+//add event listener to mark tasks as completed
+activeProjectContainer.addEventListener("click", e => {
+  if (e.target.classList.contains("checkbox") === true) {
+    const selectedProject = projects.find(
+      project => project.id === selectedProjectId
+    );
+    const selectedTask = selectedProject.tasks.find(
+      task => task.id === e.target.id
+    );
+    selectedTask.completed = e.target.checked;
+  }
+  save();
 });
 
 function saveAndRender() {
@@ -44,7 +60,8 @@ function render() {
 
 function renderTaskList() {
   if (selectedProjectId == null) {
-    activeProjectContainer.style.display = "none";
+    return;
+    // activeProjectContainer.style.display = "none";
   } else {
     activeProjectContainer.style.display = "";
     let selectedProject = projects.find(
@@ -54,15 +71,31 @@ function renderTaskList() {
     selectedProject.tasks.forEach(task => {
       const listElement = document.createElement("li");
       const checkbox = document.createElement("input");
+      checkbox.classList.add("checkbox");
+      const label = document.createElement("label");
+      // label.htmlFor = task.id;
+      checkbox.id = task.id;
+      checkbox.checked = task.completed;
+      checkbox.type = "checkbox";
       const listItemContainer = document.createElement("div");
       listItemContainer.classList.add("list-item-container");
       taskList.appendChild(listItemContainer);
 
-      checkbox.type = "checkbox";
       listElement.classList.add("list-item");
       listElement.innerText = task.name;
       listItemContainer.appendChild(checkbox);
+
       listItemContainer.appendChild(listElement);
+
+      if (task.dueDate !== "") {
+        const dueDateContainer = document.createElement("div");
+        const dueDate = task.dueDate;
+        dueDateContainer.classList.add("due-date-container");
+        dueDateContainer.innerText = dueDate;
+
+        listItemContainer.appendChild(dueDateContainer);
+      }
+
       if (task.notes !== "") {
         const listNoteElement = document.createElement("p");
         const listNoteElementContainer = document.createElement("div");
@@ -74,6 +107,7 @@ function renderTaskList() {
       }
     });
   }
+  save();
 }
 
 function renderProjects() {
@@ -106,6 +140,7 @@ function clearElement(element) {
     element.removeChild(element.firstChild);
   }
 }
+
 render();
 
 newProjectForm.addEventListener("submit", e => {
@@ -124,9 +159,15 @@ newTaskForm.addEventListener("submit", e => {
   let selectedProject = projects.find(
     project => project.id === selectedProjectId
   );
-  let task = new Task(newTaskInput.value);
+  let task = new Task(
+    newTaskInput.value,
+    newTaskNotesInput.value,
+    newTaskDateInput.value
+  );
   selectedProject.tasks.push(task);
   newTaskInput.value = null;
+  newTaskNotesInput.value = null;
+  newTaskDateInput.value = null;
   saveAndRender();
 });
 
@@ -137,16 +178,42 @@ class Project {
     this.tasks = [];
   }
 }
+
 class Task {
-  constructor(name) {
+  constructor(name, notes, dueDate) {
     this.name = name;
     this.id = Date.now().toString();
-    this.notes = "";
-    this.dueDate = "";
+    this.notes = notes;
+    this.dueDate = dueDate;
     this.completed = false;
   }
 }
 
-// add checkbox which changes completed status
-//make proper add task modal that opens when click new task
-//make homepage with all tasks in all projects
+// // //make homepage with all tasks in all projects
+//make due date functionality work
+
+// function renderHomePage() {
+//   renderProjects();
+//   if (selectedProjectId !== null) return;
+//   activeProjectContainer.style.display = "";
+//   clearElement(activeProjectContainer);
+//   projects.forEach(project => {
+//     const projectName = document.createElement("h2");
+//     projectName.innerText = project.name;
+//     activeProjectContainer.appendChild(projectName);
+
+//     project.tasks.forEach(task => {
+//       const listElement = document.createElement("li");
+//       const checkbox = document.createElement("input");
+//       const listItemContainer = document.createElement("div");
+//       listItemContainer.classList.add("list-item-container");
+//       activeProjectContainer.appendChild(listItemContainer);
+
+//       checkbox.type = "checkbox";
+//       listElement.classList.add("list-item");
+//       listElement.innerText = task.name;
+//       listItemContainer.appendChild(checkbox);
+//       listItemContainer.appendChild(listElement);
+//     });
+//   });
+// }
