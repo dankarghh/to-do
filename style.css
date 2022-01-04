@@ -110,6 +110,10 @@ h2 {
   padding: 0.5rem;
   max-width: 600px;
 }
+
+.hidden {
+  display: none;
+}
 .new-task-form {
   margin-top: 1rem;
   box-shadow: 2px 2px 15px 0px #989898;
@@ -125,6 +129,6 @@ h2 {
 }
 .due-date-container {
   display: flex;
-  width: 600px;
+  width: 500px;
   justify-content: end;
 }

@@ -54,6 +54,7 @@ function saveAndRender() {
 
 function render() {
   clearElement(projectsContainer);
+
   renderProjects();
   renderTaskList();
 }
@@ -63,6 +64,7 @@ function renderTaskList() {
     return;
     // activeProjectContainer.style.display = "none";
   } else {
+    newTaskForm.classList.remove("hidden");
     activeProjectContainer.style.display = "";
     let selectedProject = projects.find(
       project => project.id === selectedProjectId
@@ -127,6 +129,7 @@ function renderProjects() {
 deleteProjectBtn.addEventListener("click", e => {
   projects = projects.filter(project => project.id !== selectedProjectId);
   selectedProjectId = null;
+
   save();
   render();
 });
@@ -140,7 +143,6 @@ function clearElement(element) {
     element.removeChild(element.firstChild);
   }
 }
-
 render();
 
 newProjectForm.addEventListener("submit", e => {
@@ -189,31 +191,33 @@ class Task {
   }
 }
 
-// // //make homepage with all tasks in all projects
-//make due date functionality work
+// //make homepage with all tasks in all projects
+// make due date functionality work
 
-// function renderHomePage() {
-//   renderProjects();
-//   if (selectedProjectId !== null) return;
-//   activeProjectContainer.style.display = "";
-//   clearElement(activeProjectContainer);
-//   projects.forEach(project => {
-//     const projectName = document.createElement("h2");
-//     projectName.innerText = project.name;
-//     activeProjectContainer.appendChild(projectName);
+function renderHomePage() {
+  if (selectedProjectId !== null) return;
+  renderProjects();
+  activeProjectContainer.style.display = "";
+  clearElement(activeProjectContainer);
+  projects.forEach(project => {
+    const projectName = document.createElement("h2");
+    projectName.innerText = project.name;
+    activeProjectContainer.appendChild(projectName);
 
-//     project.tasks.forEach(task => {
-//       const listElement = document.createElement("li");
-//       const checkbox = document.createElement("input");
-//       const listItemContainer = document.createElement("div");
-//       listItemContainer.classList.add("list-item-container");
-//       activeProjectContainer.appendChild(listItemContainer);
+    project.tasks.forEach(task => {
+      const listElement = document.createElement("li");
+      const checkbox = document.createElement("input");
+      const listItemContainer = document.createElement("div");
+      listItemContainer.classList.add("list-item-container");
+      activeProjectContainer.appendChild(listItemContainer);
 
-//       checkbox.type = "checkbox";
-//       listElement.classList.add("list-item");
-//       listElement.innerText = task.name;
-//       listItemContainer.appendChild(checkbox);
-//       listItemContainer.appendChild(listElement);
-//     });
-//   });
-// }
+      checkbox.type = "checkbox";
+      listElement.classList.add("list-item");
+      listElement.innerText = task.name;
+      listItemContainer.appendChild(checkbox);
+      listItemContainer.appendChild(listElement);
+    });
+  });
+}
+// function formatDate()
+// renderHomePage();
